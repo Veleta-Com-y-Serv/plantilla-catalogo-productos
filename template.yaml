@@ -14,8 +14,66 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: tecnico
 plan_minimo: presencia
-version: 1.0.0
+version: 1.1.0
 base: astrowind
 demo_url: https://demo-plantilla-catalogo-productos.noexpertise.com
 activa: true
 orden: 140
+
+# Asistente de puesta en marcha (NoExpertise): un paso por pantalla. Rutas del site sin índices;
+# tipos: texto y lista (la IA propone), datos, fotos, eleccion (colores y logo) y repaso.
+asistente:
+  - id: negocio
+    titulo: "Tu empresa"
+    pregunta: "¿Cómo se llama tu empresa y qué vendéis?"
+    ayuda: "Qué productos, para quién (empresas o particulares) y en qué zona."
+    tipo: texto
+    campos: [nombre, eslogan, secciones.hero.antetitulo, secciones.hero.titulo, secciones.hero.texto, seo.descripcion]
+  - id: contacto
+    titulo: "Cómo te encuentran"
+    pregunta: "¿Dónde estáis y cómo os pueden llamar o escribir?"
+    ayuda: "Solo lo que quieras que vean tus clientes. Lo que dejes vacío no sale en tu web."
+    tipo: datos
+    campos: [contacto.telefono, contacto.whatsapp, contacto.email, contacto.direccion, contacto.horario, redes.linkedin, redes.facebook]
+  - id: categorias
+    titulo: "Categorías"
+    pregunta: "¿En qué grupos divides tus productos? Uno por línea."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.categorias.items]
+  - id: productos
+    titulo: "Tus productos"
+    pregunta: "Cuéntame los productos que quieres enseñar: nombre, referencia, características y el precio si quieres. Uno por línea."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.productos.productos]
+  - id: ventajas
+    titulo: "Por qué vosotros"
+    pregunta: "¿Qué os diferencia? Servicio técnico, garantía, envíos…"
+    tipo: texto
+    campos: [secciones.ventajas.titulo, secciones.ventajas.items]
+  - id: proceso
+    titulo: "Cómo pedir"
+    pregunta: "¿Cómo se hace un pedido, paso a paso?"
+    tipo: texto
+    campos: [secciones.proceso.titulo, secciones.proceso.items]
+  - id: preguntas
+    titulo: "Preguntas frecuentes"
+    pregunta: "¿Qué os preguntan más a menudo? Escribe cada pregunta y lo que respondéis."
+    ayuda: "Si lo prefieres, añádelos luego en Contenido."
+    tipo: lista
+    campos: [secciones.preguntas.preguntas]
+  - id: fotos
+    titulo: "Tus fotos"
+    pregunta: "Pon una foto de portada: tu producto estrella o tu nave."
+    ayuda: "Sube las tuyas o elige una del banco. Las que no cambies se quedan como están."
+    tipo: fotos
+    campos: [secciones.hero.imagen]
+  - id: aspecto
+    titulo: "Colores y logo"
+    pregunta: "Elige los colores de tu web y, si tienes, tu logo."
+    tipo: eleccion
+    campos: [colores.primario, colores.acento, logo]
+  - id: repaso
+    titulo: "Repaso"
+    tipo: repaso
