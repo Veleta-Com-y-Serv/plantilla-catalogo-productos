@@ -2,6 +2,7 @@
 // Apartado de texto genérico: antetítulo, título, párrafos, imagen opcional sobre rejilla técnica, lista con iconos y botón.
 // Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
 import { seccion, parrafos } from '../../data/site';
+import { altSeccion } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
@@ -16,7 +17,7 @@ const items = s ? s.items.filter((i) => i.titulo) : [];
       <div class:list={['grid items-start gap-10', s.imagen ? 'lg:grid-cols-2 lg:gap-14' : 'max-w-3xl']}>
         {s.imagen && (
           <div class="rejilla-tecnica border border-[var(--c-borde-fuerte)] p-4">
-            <Imagen src={s.imagen} alt="" ancho={1000} alto={750} respaldo="/placeholders/producto.svg" class="aspect-[4/3] w-full object-cover" />
+            <Imagen src={s.imagen} alt={altSeccion(s)} ancho={1000} alto={750} respaldo="/placeholders/producto.svg" class="aspect-[4/3] w-full object-cover" />
           </div>
         )}
         <div>

@@ -2,6 +2,7 @@
 // Categorías: mosaico de casillas con borde marcado. Cada item lleva `imagen` (foto de producto) o, si no, su `icono`.
 // Al pulsar una casilla se filtra el catálogo por esa categoría (titulo = productos[].categoria). `url` opcional la sustituye.
 import { seccion, buscarSeccion, clave } from '../../data/site';
+import { altFicha } from '../../lib/seo';
 import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
@@ -30,7 +31,7 @@ const destino = productos ? `/#${productos.id}` : '';
                     <Icono nombre="flecha" tam={16} class="text-[var(--c-acento-texto)] opacity-0 transition-opacity group-hover:opacity-100" />
                   </div>
                   {it.imagen ? (
-                    <Imagen src={it.imagen} alt="" ancho={480} alto={360} respaldo="/placeholders/categoria.svg" class="mx-auto aspect-[4/3] w-full max-w-[16rem] object-contain p-2 mix-blend-multiply" />
+                    <Imagen src={it.imagen} alt={altFicha(it)} ancho={480} alto={360} respaldo="/placeholders/categoria.svg" class="mx-auto aspect-[4/3] w-full max-w-[16rem] object-contain p-2 mix-blend-multiply" />
                   ) : (
                     <span class="mx-3 mt-4 grid h-14 w-14 place-items-center border-2 border-primario text-primario group-hover:bg-acento">
                       <Icono nombre={it.icono || 'caja'} tam={28} />

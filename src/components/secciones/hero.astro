@@ -3,6 +3,7 @@
 // foto de producto sobre una rejilla técnica (patrón CSS) con marcas de esquina. `items` (opcional): datos breves
 // en una tabla de tres celdas bajo los botones (titulo = dato, texto = etiqueta); sin items no se pinta.
 import { seccion } from '../../data/site';
+import { altHero } from '../../lib/seo';
 import Imagen from '../ui/Imagen.astro';
 interface Props { id: string; primera?: boolean }
 const { id, primera = false } = Astro.props;
@@ -41,7 +42,7 @@ const datos = s ? s.items.filter((i) => i.titulo) : [];
             <span class="esquina esquina--2" aria-hidden="true" />
             <span class="esquina esquina--3" aria-hidden="true" />
             <span class="esquina esquina--4" aria-hidden="true" />
-            <Imagen src={s.imagen} alt="" ancho={1000} alto={1000} prioridad={primera} respaldo="/placeholders/producto.svg" class="relative mx-auto aspect-square w-full max-w-md object-contain mix-blend-multiply" />
+            <Imagen src={s.imagen} alt={altHero()} ancho={1000} alto={1000} prioridad={primera} respaldo="/placeholders/producto.svg" class="relative mx-auto aspect-square w-full max-w-md object-contain mix-blend-multiply" />
           </div>
         )}
       </div>

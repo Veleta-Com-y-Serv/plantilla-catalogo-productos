@@ -14,7 +14,7 @@ secciones:
   - { id: contacto, nombre: Contacto }
 estilo: tecnico
 plan_minimo: presencia
-version: 1.1.0
+version: 1.2.0
 base: astrowind
 demo_url: https://demo-plantilla-catalogo-productos.noexpertise.com
 activa: true
