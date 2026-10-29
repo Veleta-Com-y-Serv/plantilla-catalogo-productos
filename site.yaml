@@ -1,0 +1,125 @@
+# Contenido de la web. Es lo único que rellena la plataforma NoExpertise.
+# Las secciones se muestran en el orden de este fichero. Para ocultar una: activa: false.
+# Apartado nuevo: un id propio (es su ancla, /#id) con `tipo:` = el diseño de otra sección o `texto`.
+nombre: Suministros Zapardiel
+eslogan: Maquinaria y herramienta para taller, obra y campo en Medina del Campo.
+sector: maquinaria
+logo: ""          # ruta a una imagen en public/ (p. ej. /logo.svg). Vacío = nombre en texto.
+colores:
+  primario: "#2e3842"
+  acento: "#f2711c"
+  fondo: "#f3f4f5"
+  texto: "#15191d"
+contacto:
+  telefono: "983 80 27 15"
+  email: ventas@suministroszapardiel.es
+  direccion: Polígono Las Salinas, calle del Hierro 9, 47400 Medina del Campo (Valladolid)
+  horario: Lunes a viernes de 8:00 a 14:00 y de 15:30 a 19:00. Sábados de 9:00 a 13:00.
+  whatsapp: "+34 648 80 27 15"
+redes:
+  instagram: ""
+  facebook: https://www.facebook.com/
+  linkedin: https://www.linkedin.com/
+menu:
+  - { texto: Catálogo, url: "/#productos" }
+  - { texto: Ventajas, url: "/#ventajas" }
+  - { texto: Cómo pedir, url: "/#proceso" }
+  - { texto: Preguntas, url: "/#preguntas" }
+  - { texto: Contacto, url: "/#contacto" }
+boton_cabecera: { texto: Pedir presupuesto, url: "/#contacto" }
+seo:
+  titulo: Suministros Zapardiel · Maquinaria y herramienta en Medina del Campo
+  descripcion: Compresores, generadores, soldadura, elevación y herramienta profesional. Venta, ocasión y servicio técnico propio en Valladolid.
+  tipo: WholesaleStore   # tipo de schema.org
+marca_pie: true   # «Web creada con NoExpertise» en el pie
+
+secciones:
+  hero:
+    activa: true
+    antetitulo: Catálogo profesional · Valladolid
+    titulo: Maquinaria y herramienta que no te deja parado
+    texto: Equipos para talleres, obras y explotaciones agrícolas. Te asesoramos, te lo llevamos y te lo reparamos.
+    imagen: /fotos/hero.jpg
+    cta: { texto: Pedir presupuesto, url: "/#contacto" }
+    cta_secundario: { texto: Ver catálogo, url: "/#productos" }
+    items:   # datos breves bajo los botones (se ocultan si la lista está vacía)
+      - { titulo: "+1.500", texto: referencias en almacén }
+      - { titulo: 24/48 h, texto: entrega en Castilla y León }
+      - { titulo: Taller propio, texto: reparación y revisiones }
+
+  categorias:
+    activa: true
+    antetitulo: Categorías
+    titulo: Todo lo que necesita tu taller
+    texto: Elige una familia para ver sus productos.
+    items:   # titulo = nombre de la categoría (igual que productos[].categoria para que filtre)
+      - { titulo: Compresores, texto: De pistón y de tornillo., icono: compresor, imagen: /fotos/categoria-compresores.jpg }
+      - { titulo: Generadores, texto: Gasolina y diésel., icono: rayo, imagen: /fotos/categoria-generadores.jpg }
+      - { titulo: Soldadura, texto: "Inverter, MIG y TIG.", icono: llama, imagen: /fotos/categoria-soldadura.jpg }
+      - { titulo: Elevación, texto: "Gatos, polipastos y elevadores.", icono: elevacion, imagen: /fotos/categoria-elevacion.jpg }
+      - { titulo: Hidrolimpiadoras, texto: Agua fría y caliente., icono: gota, imagen: /fotos/categoria-hidrolimpiadoras.jpg }
+      - { titulo: Herramienta eléctrica, texto: "Taladros, amoladoras y más.", icono: herramienta, imagen: /fotos/categoria-herramienta.jpg }
+
+  productos:
+    activa: true
+    antetitulo: Catálogo
+    titulo: Productos destacados
+    texto: Precios sin IVA. Si no ves lo que buscas, lo conseguimos.
+    cta: { texto: Pedir el catálogo completo, url: "/#contacto" }
+    productos:
+      - { nombre: "Compresor de tornillo 7,5 kW", ref: CT-7510, categoria: Compresores, texto: Silencioso y con secador integrado. Para talleres con uso continuo., caracteristicas: "Potencia: 7,5 kW; Caudal: 1.050 l/min; Presión: 10 bar; Calderín: 500 l; Ruido: 66 dB", precio: "6.950 € + IVA", estado: Nuevo, imagen: /fotos/producto-1.jpg }
+      - { nombre: Compresor de pistón 100 l, ref: CP-3100, categoria: Compresores, texto: Ruedas y asa para moverlo por el taller., caracteristicas: "Potencia: 2,2 kW; Caudal: 360 l/min; Presión: 10 bar; Calderín: 100 l", precio: "689 € + IVA", estado: "", imagen: /fotos/producto-2.jpg }
+      - { nombre: Generador diésel insonorizado 10 kVA, ref: GD-1000, categoria: Generadores, texto: Arranque eléctrico y cuadro con protecciones., caracteristicas: "Potencia: 10 kVA; Motor: diésel 4 tiempos; Autonomía: 11 h al 75 %; Peso: 290 kg", precio: Consultar, estado: Nuevo, imagen: /fotos/producto-3.jpg }
+      - { nombre: "Generador gasolina 3,5 kW", ref: GG-0350, categoria: Generadores, texto: Ligero y con ruedas. Revisado en nuestro taller., caracteristicas: "Potencia: 3,5 kW; Depósito: 15 l; Salidas: 2 × 230 V; Garantía: 12 meses", precio: "420 € + IVA", estado: Ocasión, imagen: /fotos/producto-4.jpg }
+      - { nombre: Soldadora inverter MIG 250, ref: SM-0250, categoria: Soldadura, texto: Para acero e inoxidable. Con antorcha y pinza de masa., caracteristicas: "Intensidad: 30-250 A; Alimentación: 230 V; Hilo: 0,6-1,0 mm; Peso: 18 kg", precio: "1.190 € + IVA", estado: Nuevo, imagen: /fotos/producto-5.jpg }
+      - { nombre: Elevador de dos columnas 4 t, ref: EL-2040, categoria: Elevación, texto: Montaje e instalación incluidos en la provincia., caracteristicas: "Capacidad: 4.000 kg; Altura de elevación: 1.900 mm; Motor: 2,2 kW 400 V", precio: Consultar, estado: "", imagen: /fotos/producto-6.jpg }
+      - { nombre: Hidrolimpiadora de agua caliente 200 bar, ref: HL-2000, categoria: Hidrolimpiadoras, texto: Para naves, maquinaria agrícola y vehículos., caracteristicas: "Presión: 200 bar; Caudal: 900 l/h; Temperatura: hasta 140 °C; Motor: 400 V", precio: "2.480 € + IVA", estado: Nuevo, imagen: /fotos/producto-7.jpg }
+      - { nombre: Taladro percutor 1.100 W, ref: TP-1100, categoria: Herramienta eléctrica, texto: Con maletín y juego de brocas., caracteristicas: "Potencia: 1.100 W; Portabrocas: 13 mm; Percusión: 48.000 gpm", precio: "139 € + IVA", estado: "", imagen: /fotos/producto-8.jpg }
+
+  ventajas:
+    activa: true
+    antetitulo: Por qué nosotros
+    titulo: Más que una tienda de maquinaria
+    items:
+      - { titulo: Servicio técnico propio, texto: Reparamos y revisamos todo lo que vendemos., icono: herramienta }
+      - { titulo: Garantía y repuestos, texto: Recambios originales en almacén., icono: escudo }
+      - { titulo: Envío e instalación, texto: Te lo llevamos y lo dejamos funcionando., icono: camion }
+      - { titulo: Financiación, texto: Paga en cómodos plazos con tu banco., icono: tarjeta }
+
+  proceso:
+    activa: true
+    antetitulo: Cómo pedir
+    titulo: Tu pedido en cuatro pasos
+    items:
+      - { titulo: Nos cuentas qué necesitas, texto: "Por teléfono, WhatsApp o el formulario." }
+      - { titulo: Te enviamos presupuesto, texto: Cerrado y en el mismo día laborable. }
+      - { titulo: Confirmas el pedido, texto: Transferencia o financiación. }
+      - { titulo: Entrega y puesta en marcha, texto: En 24/48 h si está en almacén. }
+
+  clientes:
+    activa: true
+    antetitulo: Confían en nosotros
+    titulo: Talleres, obras y cooperativas de la zona
+    items:   # titulo = nombre del cliente; imagen = logo opcional (se muestra en gris)
+      - { titulo: Talleres Hermanos Alonso }
+      - { titulo: Cooperativa del Adaja }
+      - { titulo: Construcciones Rueda Sur }
+      - { titulo: Transportes La Moraña }
+      - { titulo: Carrocerías Nava }
+      - { titulo: Agrícola Tierra de Pinares }
+
+  preguntas:
+    activa: true
+    antetitulo: Preguntas frecuentes
+    titulo: Lo que más nos preguntan
+    preguntas:
+      - { pregunta: ¿Vendéis a particulares?, respuesta: "Sí. Vendemos a profesionales y a particulares. Los precios se muestran sin IVA." }
+      - { pregunta: ¿Hacéis envíos fuera de Valladolid?, respuesta: "Sí, a toda la península. En Castilla y León entregamos en 24/48 h si el producto está en almacén." }
+      - { pregunta: ¿Qué garantía tienen las máquinas de ocasión?, respuesta: "Todas pasan por nuestro taller y tienen 12 meses de garantía." }
+      - { pregunta: ¿Reparáis máquinas compradas en otro sitio?, respuesta: "Sí. Te damos presupuesto antes de reparar y trabajamos con recambios originales." }
+
+  contacto:
+    activa: true
+    antetitulo: Contacto
+    titulo: Pide tu presupuesto
+    texto: Dinos qué producto te interesa y te respondemos hoy mismo con precio y plazo.

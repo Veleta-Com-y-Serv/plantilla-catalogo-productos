@@ -1,0 +1,58 @@
+---
+// Hero partido: texto con cta («Pedir presupuesto») y cta_secundario («Ver catálogo») a la izquierda; a la derecha,
+// foto de producto sobre una rejilla técnica (patrón CSS) con marcas de esquina. `items` (opcional): datos breves
+// en una tabla de tres celdas bajo los botones (titulo = dato, texto = etiqueta); sin items no se pinta.
+import { seccion } from '../../data/site';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string; primera?: boolean }
+const { id, primera = false } = Astro.props;
+const s = seccion(id);
+const datos = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <section id={id} class="border-b border-[var(--c-borde-fuerte)]">
+      <div class:list={['contenedor grid gap-10 py-10 md:py-14', s.imagen && 'lg:grid-cols-2 lg:items-center lg:gap-14']}>
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h1 class="mt-4 max-w-2xl text-[clamp(2rem,4.8vw,3.3rem)] font-extrabold text-primario">{s.titulo}</h1>}
+          {s.texto && <p class="mt-5 max-w-xl text-lg opacity-85">{s.texto}</p>}
+          {(s.cta?.url || s.cta_secundario?.url) && (
+            <div class="mt-8 flex flex-wrap gap-3">
+              {s.cta?.url && <a class="btn" href={s.cta.url}>{s.cta.texto}</a>}
+              {s.cta_secundario?.url && <a class="btn-sec text-primario" href={s.cta_secundario.url}>{s.cta_secundario.texto}</a>}
+            </div>
+          )}
+          {datos.length > 0 && (
+            <dl class="panel mt-10 grid grid-cols-1 divide-y divide-[var(--c-borde)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+              {datos.map((d) => (
+                <div class="px-4 py-3">
+                  <dt class="mono text-lg font-bold text-primario">{d.titulo}</dt>
+                  {d.texto && <dd class="text-sm opacity-75">{d.texto}</dd>}
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+        {s.imagen && (
+          <div class="hero-lamina rejilla-tecnica relative border border-[var(--c-borde-fuerte)] p-6 sm:p-10">
+            <span class="esquina esquina--1" aria-hidden="true" />
+            <span class="esquina esquina--2" aria-hidden="true" />
+            <span class="esquina esquina--3" aria-hidden="true" />
+            <span class="esquina esquina--4" aria-hidden="true" />
+            <Imagen src={s.imagen} alt="" ancho={1000} alto={1000} prioridad={primera} respaldo="/placeholders/producto.svg" class="relative mx-auto aspect-square w-full max-w-md object-contain mix-blend-multiply" />
+          </div>
+        )}
+      </div>
+    </section>
+  )
+}
+
+<style>
+  .esquina { position: absolute; width: 1.25rem; height: 1.25rem; border-color: var(--c-acento); border-style: solid; border-width: 0; }
+  .esquina--1 { left: .6rem; top: .6rem; border-left-width: 3px; border-top-width: 3px; }
+  .esquina--2 { right: .6rem; top: .6rem; border-right-width: 3px; border-top-width: 3px; }
+  .esquina--3 { left: .6rem; bottom: .6rem; border-left-width: 3px; border-bottom-width: 3px; }
+  .esquina--4 { right: .6rem; bottom: .6rem; border-right-width: 3px; border-bottom-width: 3px; }
+</style>

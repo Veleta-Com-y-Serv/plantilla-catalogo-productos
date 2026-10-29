@@ -1,0 +1,37 @@
+---
+// Preguntas frecuentes: acordeón sin JavaScript (details/summary) con borde marcado; titular a la izquierda en escritorio.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const preguntas = s ? s.preguntas.filter((p) => p.pregunta) : [];
+---
+
+{
+  s && preguntas.length > 0 && (
+    <Seccion id={Astro.props.id} class="border-t border-[var(--c-borde-fuerte)]">
+      <div class="grid gap-8 lg:grid-cols-12">
+        <Titular class="lg:col-span-4" antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+        <div class="panel divide-y divide-[var(--c-borde-fuerte)] lg:col-span-8">
+          {preguntas.map((p) => (
+            <details class="pregunta group">
+              <summary class="flex cursor-pointer list-none items-center justify-between gap-4 px-4 py-4 font-bold text-primario sm:px-5">
+                <span>{p.pregunta}</span>
+                <span class="grid h-7 w-7 shrink-0 place-items-center border border-[var(--c-borde-fuerte)] transition-transform group-open:rotate-45 group-open:bg-acento group-open:text-[var(--c-sobre-acento)]">
+                  <Icono nombre="mas" tam={16} />
+                </span>
+              </summary>
+              {p.respuesta && <p class="px-4 pb-5 opacity-85 sm:px-5">{p.respuesta}</p>}
+            </details>
+          ))}
+        </div>
+      </div>
+    </Seccion>
+  )
+}
+
+<style>
+  .pregunta summary::-webkit-details-marker { display: none; }
+</style>

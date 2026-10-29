@@ -1,0 +1,122 @@
+---
+// Productos: fichas con foto 4:3 sobre fondo neutro, estado (Nuevo / Ocasión), referencia en monoespaciada,
+// tabla de características (cadena "Clave: valor; Clave: valor" → <dl>), precio si es una cifra y botón «Consultar»
+// que lleva a contacto y deja elegido el producto en el formulario (y en el asunto del correo).
+// Filtro por categoría (en orden de aparición) con un script mínimo; también responde a la barra de categorías.
+// Con `productos: []` se ve el texto y el botón (cta) en un recuadro, sin rejilla.
+import { seccion, buscarSeccion, clave, especificaciones } from '../../data/site';
+import type { Producto } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const lista: Producto[] = s ? s.productos.filter((p) => p.nombre) : [];
+const categorias = [...new Set(lista.map((p) => p.categoria?.trim()).filter(Boolean))] as string[];
+const contacto = buscarSeccion('contacto');
+const destino = contacto ? `#${contacto.id}` : '';
+const conPrecio = (p: Producto) => !!p.precio && !/^consultar$/i.test(p.precio.trim());
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="border-y border-[var(--c-borde-fuerte)] bg-[color-mix(in_srgb,var(--c-primario)_4%,var(--c-fondo))]">
+      <div data-catalogo>
+        <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={lista.length ? s.texto : ''} />
+        {categorias.length > 1 && (
+          <div class="filtro mb-6" role="group" aria-label={s.titulo || s.antetitulo || undefined}>
+            <button type="button" data-filtro="" aria-pressed="true">Todo</button>
+            {categorias.map((c) => <button type="button" data-filtro={clave(c)} aria-pressed="false">{c}</button>)}
+          </div>
+        )}
+
+        {lista.length > 0 ? (
+          <ul class="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {lista.map((p) => {
+              const specs = especificaciones(p.caracteristicas);
+              return (
+                <li data-categoria={clave(p.categoria)} class="flex">
+                  <article class="panel flex w-full flex-col">
+                    <div class="relative border-b border-[var(--c-borde)] bg-white">
+                      <Imagen src={p.imagen || '/placeholders/producto.svg'} alt={p.nombre} ancho={800} alto={600} respaldo="/placeholders/producto.svg" class="aspect-[4/3] w-full object-contain p-3" />
+                      {p.estado && <span class:list={['estado absolute left-2 top-2', /^nuevo$/i.test(p.estado.trim()) && 'estado--nuevo']}>{p.estado}</span>}
+                    </div>
+                    <div class="flex flex-1 flex-col p-4">
+                      <div class="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                        {p.ref && <p class="mono text-xs font-semibold text-[var(--c-acento-texto)]">Ref. {p.ref}</p>}
+                        {p.categoria && <p class="text-[.7rem] font-semibold uppercase tracking-wide opacity-70">{p.categoria}</p>}
+                      </div>
+                      <h3 class="mt-1.5 text-base font-bold leading-snug text-primario">{p.nombre}</h3>
+                      {p.texto && <p class="mt-1.5 text-sm opacity-80">{p.texto}</p>}
+                      {specs.length > 0 && (
+                        <dl class="tabla-specs mt-4">
+                          {specs.map((e) =>
+                            e.clave ? (
+                              <>
+                                <dt>{e.clave}</dt>
+                                <dd>{e.valor}</dd>
+                              </>
+                            ) : (
+                              <dd class="sola">{e.valor}</dd>
+                            ),
+                          )}
+                        </dl>
+                      )}
+                      <div class="mt-auto flex flex-wrap items-center justify-between gap-3 pt-4">
+                        {conPrecio(p) && <p class="text-lg font-extrabold text-primario">{p.precio}</p>}
+                        {destino && (
+                          <a href={destino} data-producto={p.nombre} class="btn-oscuro ml-auto">
+                            <Icono nombre="mensaje" tam={16} />
+                            Consultar
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </article>
+                </li>
+              );
+            })}
+          </ul>
+        ) : (
+          <div class="panel flex flex-col gap-5 p-6 sm:flex-row sm:items-center sm:p-8">
+            <span class="grid h-12 w-12 shrink-0 place-items-center border-2 border-primario text-primario"><Icono nombre="caja" tam={24} /></span>
+            {s.texto && <p class="flex-1 text-lg">{s.texto}</p>}
+            {s.cta?.url && <a class="btn shrink-0" href={s.cta.url}>{s.cta.texto}</a>}
+          </div>
+        )}
+
+        {lista.length > 0 && s.cta?.url && (
+          <p class="mt-8 border-t border-[var(--c-borde-fuerte)] pt-6 text-center"><a class="btn-sec text-primario" href={s.cta.url}>{s.cta.texto}</a></p>
+        )}
+      </div>
+    </Seccion>
+  )
+}
+
+<script is:inline>
+  (function () {
+    if (window.__catalogoListo) return;
+    window.__catalogoListo = true;
+    function filtrar(bloque, f) {
+      bloque.querySelectorAll('[data-filtro]').forEach(function (o) { o.setAttribute('aria-pressed', String(o.getAttribute('data-filtro') === f)); });
+      bloque.querySelectorAll('[data-categoria]').forEach(function (li) { li.hidden = !!f && li.getAttribute('data-categoria') !== f; });
+    }
+    document.addEventListener('click', function (e) {
+      var b = e.target.closest('[data-filtro]');
+      if (b) { filtrar(b.closest('[data-catalogo]'), b.getAttribute('data-filtro')); return; }
+      var ir = e.target.closest('[data-ir-categoria]');
+      if (ir) {
+        var bloque = document.querySelector('[data-catalogo]');
+        var cat = ir.getAttribute('data-ir-categoria');
+        if (bloque && bloque.querySelector('[data-filtro="' + cat + '"]')) filtrar(bloque, cat);
+        return;
+      }
+      var p = e.target.closest('[data-producto]');
+      if (p) {
+        var sel = document.getElementById('f-producto');
+        if (sel) { sel.value = p.getAttribute('data-producto'); sel.dispatchEvent(new Event('change')); }
+      }
+    });
+  })();
+</script>

@@ -1,0 +1,51 @@
+---
+// Categorías: mosaico de casillas con borde marcado. Cada item lleva `imagen` (foto de producto) o, si no, su `icono`.
+// Al pulsar una casilla se filtra el catálogo por esa categoría (titulo = productos[].categoria). `url` opcional la sustituye.
+import { seccion, buscarSeccion, clave } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+const productos = buscarSeccion('productos');
+const destino = productos ? `/#${productos.id}` : '';
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {items.length > 0 && (
+        <ul class="mosaico grid grid-cols-2 border-l border-t border-[var(--c-borde-fuerte)] md:grid-cols-3">
+          {items.map((it, i) => {
+            const url = it.url || destino;
+            const Etiqueta = url ? 'a' : 'div';
+            return (
+              <li class="border-b border-r border-[var(--c-borde-fuerte)] bg-[var(--c-panel)]">
+                <Etiqueta href={url || undefined} data-ir-categoria={!it.url && url ? clave(it.titulo) : undefined} class="group flex h-full flex-col no-underline">
+                  <div class="flex items-center justify-between px-3 pt-3">
+                    <span class="mono text-xs opacity-60">{String(i + 1).padStart(2, '0')}</span>
+                    <Icono nombre="flecha" tam={16} class="text-[var(--c-acento-texto)] opacity-0 transition-opacity group-hover:opacity-100" />
+                  </div>
+                  {it.imagen ? (
+                    <Imagen src={it.imagen} alt="" ancho={480} alto={360} respaldo="/placeholders/categoria.svg" class="mx-auto aspect-[4/3] w-full max-w-[16rem] object-contain p-2 mix-blend-multiply" />
+                  ) : (
+                    <span class="mx-3 mt-4 grid h-14 w-14 place-items-center border-2 border-primario text-primario group-hover:bg-acento">
+                      <Icono nombre={it.icono || 'caja'} tam={28} />
+                    </span>
+                  )}
+                  <div class="mt-auto px-3 pb-4 pt-3 sm:px-4">
+                    <h3 class="text-base font-bold text-primario group-hover:underline sm:text-lg">{it.titulo}</h3>
+                    {it.texto && <p class="mt-0.5 text-sm opacity-75">{it.texto}</p>}
+                  </div>
+                </Etiqueta>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </Seccion>
+  )
+}

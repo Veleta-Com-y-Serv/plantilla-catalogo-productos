@@ -1,0 +1,30 @@
+---
+// Clientes: fila de casillas con el logo en gris (items[].imagen) o, si no hay logo, el nombre (items[].titulo).
+// Con la lista vacía no se pinta (no se inventan clientes).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Imagen from '../ui/Imagen.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo || i.imagen) : [];
+---
+
+{
+  s && items.length > 0 && (
+    <Seccion id={Astro.props.id} class="border-t border-[var(--c-borde-fuerte)] py-12 md:py-16">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      <ul class="grid grid-cols-2 border-l border-t border-[var(--c-borde-fuerte)] sm:grid-cols-3 lg:grid-cols-6">
+        {items.map((c) => (
+          <li class="grid min-h-24 place-items-center border-b border-r border-[var(--c-borde-fuerte)] bg-[var(--c-panel)] p-4 text-center">
+            {c.imagen ? (
+              <Imagen src={c.imagen} alt={c.titulo || ''} ancho={240} alto={96} class="max-h-12 w-auto object-contain opacity-70 grayscale" />
+            ) : (
+              <span class="text-sm font-bold uppercase leading-tight tracking-wide opacity-70">{c.titulo}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </Seccion>
+  )
+}

@@ -1,0 +1,46 @@
+---
+// Apartado de texto genérico: antetítulo, título, párrafos, imagen opcional sobre rejilla técnica, lista con iconos y botón.
+// Lo usan los apartados nuevos que pide el cliente (site.yaml: `tipo: texto`).
+import { seccion, parrafos } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Imagen from '../ui/Imagen.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="border-t border-[var(--c-borde-fuerte)]">
+      <div class:list={['grid items-start gap-10', s.imagen ? 'lg:grid-cols-2 lg:gap-14' : 'max-w-3xl']}>
+        {s.imagen && (
+          <div class="rejilla-tecnica border border-[var(--c-borde-fuerte)] p-4">
+            <Imagen src={s.imagen} alt="" ancho={1000} alto={750} respaldo="/placeholders/producto.svg" class="aspect-[4/3] w-full object-cover" />
+          </div>
+        )}
+        <div>
+          {s.antetitulo && <p class="antetitulo">{s.antetitulo}</p>}
+          {s.titulo && <h2 class="titulo-seccion">{s.titulo}</h2>}
+          <div class="mt-5 space-y-4 opacity-85">
+            {parrafos(s.texto).map((p) => <p>{p}</p>)}
+          </div>
+          {items.length > 0 && (
+            <ul class="panel mt-8 divide-y divide-[var(--c-borde)]">
+              {items.map((it) => (
+                <li class="flex gap-3 p-3">
+                  <Icono nombre={it.icono || 'check'} tam={20} class="mt-0.5 shrink-0 text-[var(--c-acento-texto)]" />
+                  <div>
+                    <p class="font-bold text-primario">{it.titulo}</p>
+                    {it.texto && <p class="text-sm opacity-75">{it.texto}</p>}
+                  </div>
+                </li>
+              ))}
+            </ul>
+          )}
+          {s.cta?.url && <a class="btn mt-8" href={s.cta.url}>{s.cta.texto}</a>}
+        </div>
+      </div>
+    </Seccion>
+  )
+}

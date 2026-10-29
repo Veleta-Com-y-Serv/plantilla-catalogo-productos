@@ -1,0 +1,21 @@
+# Metadatos de la plantilla para el catálogo de NoExpertise.
+id: catalogo-productos
+nombre: Catálogo de productos
+descripcion: Web técnica para mostrar productos con referencias, características y botón de pedir presupuesto.
+sectores: [maquinaria, industria, mayorista, suministros, catalogo, ferreteria]
+secciones:
+  - { id: hero, nombre: Portada }
+  - { id: categorias, nombre: Categorías }
+  - { id: productos, nombre: Productos }
+  - { id: ventajas, nombre: Ventajas }
+  - { id: proceso, nombre: Cómo pedir }
+  - { id: clientes, nombre: Clientes }
+  - { id: preguntas, nombre: Preguntas frecuentes }
+  - { id: contacto, nombre: Contacto }
+estilo: tecnico
+plan_minimo: presencia
+version: 1.0.0
+base: astrowind
+demo_url: https://demo-plantilla-catalogo-productos.noexpertise.com
+activa: true
+orden: 140

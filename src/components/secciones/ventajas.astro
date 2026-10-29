@@ -1,0 +1,34 @@
+---
+// Ventajas: banda acero con casillas separadas por líneas (items: titulo, texto, icono).
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="fondo-oscuro bg-primario text-white">
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {items.length > 0 && (
+        <ul class="grid border-l border-t border-white/20 sm:grid-cols-2 lg:grid-cols-4">
+          {items.map((it) => (
+            <li class="flex gap-4 border-b border-r border-white/20 p-5 lg:flex-col">
+              <span class="grid h-11 w-11 shrink-0 place-items-center bg-acento text-[var(--c-sobre-acento)]">
+                <Icono nombre={it.icono || 'check'} tam={22} />
+              </span>
+              <div>
+                <h3 class="text-base font-bold">{it.titulo}</h3>
+                {it.texto && <p class="mt-1 text-sm text-white/75">{it.texto}</p>}
+              </div>
+            </li>
+          ))}
+        </ul>
+      )}
+      {s.cta?.url && <p class="mt-8"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+    </Seccion>
+  )
+}

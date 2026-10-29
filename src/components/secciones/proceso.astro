@@ -1,0 +1,42 @@
+---
+// Proceso: pasos numerados (01, 02…) en horizontal unidos por una línea; en móvil, en vertical con línea lateral.
+import { seccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const items = s ? s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id}>
+      <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+      {items.length > 0 && (
+        <ol class="pasos grid gap-6 md:gap-4" style={`--pasos:${items.length}`}>
+          {items.map((it, i) => (
+            <li class="paso relative pl-14 md:pl-0 md:pt-14">
+              <span class="paso-num mono absolute left-0 top-0 grid h-10 w-10 place-items-center border-2 border-primario bg-[var(--c-panel)] text-sm font-bold text-primario">
+                {String(i + 1).padStart(2, '0')}
+              </span>
+              <h3 class="text-base font-bold text-primario">{it.titulo}</h3>
+              {it.texto && <p class="mt-1 text-sm opacity-80">{it.texto}</p>}
+            </li>
+          ))}
+        </ol>
+      )}
+      {s.cta?.url && <p class="mt-8"><a class="btn" href={s.cta.url}>{s.cta.texto}</a></p>}
+    </Seccion>
+  )
+}
+
+<style>
+  .paso::before { content: ""; position: absolute; left: 1.2rem; top: 2.5rem; bottom: -1.5rem; width: 2px; background: repeating-linear-gradient(var(--c-acento) 0 6px, transparent 6px 10px); }
+  .paso:last-child::before { display: none; }
+  .paso:first-child .paso-num { background: var(--c-acento); border-color: var(--c-acento); color: var(--c-sobre-acento); }
+  @media (min-width: 768px) {
+    .pasos { grid-template-columns: repeat(min(var(--pasos), 4), minmax(0, 1fr)); }
+    .paso { padding-right: 1rem; }
+    .paso::before { left: 2.5rem; right: 0; top: 1.2rem; bottom: auto; width: auto; height: 2px; background: repeating-linear-gradient(90deg, var(--c-acento) 0 6px, transparent 6px 10px); }
+  }
+</style>

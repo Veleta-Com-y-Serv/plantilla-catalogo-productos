@@ -1,0 +1,94 @@
+---
+// Cabecera técnica en tres pisos:
+// 1) barra de utilidades (teléfono, email y horario de site.yaml → contacto),
+// 2) marca + menú (site.yaml → menu) + botón (boton_cabecera, «Pedir presupuesto»); en móvil, menú plegable (<details>),
+// 3) barra de categorías: títulos de la sección `categorias` (o la que use ese diseño); al pulsar, filtra el catálogo.
+// Estilos: .utilidades, .cabecera--tecnica y .categorias-barra en src/styles/global.css.
+import { site, tel, buscarSeccion, clave } from '../data/site';
+import type { Enlace } from '../data/site';
+import Icono from './ui/Icono.astro';
+interface Props { variante?: string; cta?: Enlace | null }
+const { variante = 'tecnica', cta = null } = Astro.props;
+const c = site.contacto;
+const cats = buscarSeccion('categorias');
+const productos = buscarSeccion('productos');
+const destino = productos ? `/#${productos.id}` : cats ? `/#${cats.id}` : '/';
+const categorias = cats ? cats.s.items.filter((i) => i.titulo) : [];
+---
+
+{
+  (c.telefono || c.email || c.horario) && (
+    <div class="utilidades">
+      <div class="contenedor utilidades-fila">
+        {c.telefono && (
+          <a href={tel(c.telefono)} aria-label={`Llamar al ${c.telefono}`}>
+            <Icono nombre="telefono" tam={14} />
+            <span class="mono">{c.telefono}</span>
+          </a>
+        )}
+        {c.email && (
+          <a href={`mailto:${c.email}`} class="utilidades-email">
+            <Icono nombre="correo" tam={14} />
+            {c.email}
+          </a>
+        )}
+        {c.horario && <span class="utilidades-horario">{c.horario}</span>}
+      </div>
+    </div>
+  )
+}
+<header class={`cabecera cabecera--${variante}`}>
+  <div class="contenedor cabecera-fila">
+    <a href="/" class="marca" aria-label={`${site.nombre}, inicio`}>
+      {
+        site.logo ? (
+          <img src={site.logo} alt={site.nombre} class="marca-logo" width="160" height="40" />
+        ) : (
+          <>
+            <span class="marca-inicial" aria-hidden="true">{site.nombre.trim().charAt(0)}</span>
+            <span class="marca-nombre">{site.nombre}</span>
+          </>
+        )
+      }
+    </a>
+    <nav class="cabecera-nav" aria-label="Menú principal">
+      {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+    </nav>
+    {cta && cta.url && <a href={cta.url} class="btn cabecera-cta">{cta.texto}</a>}
+    {
+      site.menu.length > 0 && (
+        <details class="menu-movil">
+          <summary>
+            <span class="menu-movil-icono" aria-hidden="true" />
+            <span>Menú</span>
+          </summary>
+          <nav class="menu-movil-panel" aria-label="Menú">
+            {site.menu.map((e) => <a href={e.url}>{e.texto}</a>)}
+            {cta && cta.url && <a href={cta.url} class="btn">{cta.texto}</a>}
+          </nav>
+        </details>
+      )
+    }
+  </div>
+</header>
+{
+  categorias.length > 0 && (
+    <nav class="categorias-barra" aria-label={cats?.s.antetitulo || cats?.s.titulo || undefined}>
+      <ul class="contenedor">
+        {categorias.map((cat) => (
+          <li>
+            <a href={cat.url || destino} data-ir-categoria={cat.url ? undefined : clave(cat.titulo)}>
+              <Icono nombre={cat.icono || 'caja'} tam={16} />
+              {cat.titulo}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  )
+}
+<script is:inline>
+  document.querySelectorAll('.menu-movil a').forEach(function (a) {
+    a.addEventListener('click', function () { a.closest('details').open = false; });
+  });
+</script>

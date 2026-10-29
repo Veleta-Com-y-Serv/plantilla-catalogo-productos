@@ -1,0 +1,71 @@
+---
+// Formulario sin servidor: si hay email en site.yaml abre el programa de correo (mailto) con los datos en el cuerpo.
+// Si no hay email, se queda como muestra y lo avisa. Para un envío real, cambia `action` por el de tu proveedor.
+// `productos`: nombres para el desplegable «Producto de interés» (vacío = no se muestra). El producto elegido se
+// añade al asunto del correo con un script mínimo; sin JavaScript, va igualmente en el cuerpo.
+import { site } from '../../data/site';
+interface Props { boton?: string; class?: string; asunto?: string; productos?: string[] }
+const { boton = 'Enviar', class: clase = '', asunto = `Consulta desde la web de ${site.nombre}`, productos = [] } = Astro.props;
+const email = site.contacto.email;
+const accion = email ? `mailto:${email}?subject=${encodeURIComponent(asunto)}` : '';
+---
+
+<form class:list={['formulario', clase]} action={accion || undefined} method="post" enctype="text/plain" data-email={email || undefined} data-asunto={asunto}>
+  <div class="formulario-doble">
+    <div class="campo">
+      <label for="f-nombre">Nombre</label>
+      <input id="f-nombre" name="nombre" type="text" autocomplete="name" required />
+    </div>
+    <div class="campo">
+      <label for="f-empresa">Empresa</label>
+      <input id="f-empresa" name="empresa" type="text" autocomplete="organization" />
+    </div>
+  </div>
+  <div class="formulario-doble">
+    <div class="campo">
+      <label for="f-telefono">Teléfono</label>
+      <input id="f-telefono" name="telefono" type="tel" autocomplete="tel" required />
+    </div>
+    <div class="campo">
+      <label for="f-email">Email</label>
+      <input id="f-email" name="email" type="email" autocomplete="email" />
+    </div>
+  </div>
+  {
+    productos.length > 0 && (
+      <div class="campo">
+        <label for="f-producto">Producto de interés</label>
+        <select id="f-producto" name="producto">
+          <option value="">—</option>
+          {productos.map((p) => <option value={p}>{p}</option>)}
+        </select>
+      </div>
+    )
+  }
+  <div class="campo">
+    <label for="f-mensaje">Mensaje</label>
+    <textarea id="f-mensaje" name="mensaje" rows="4" required></textarea>
+  </div>
+  <label class="campo-check">
+    <input type="checkbox" name="privacidad" required />
+    <span>He leído el <a href="/aviso-legal">aviso legal y la política de privacidad</a>.</span>
+  </label>
+  <button type="submit" class="btn">{boton}</button>
+  <p class="formulario-aviso">
+    {
+      email
+        ? 'Al enviar se abre tu programa de correo con el mensaje listo.'
+        : 'Formulario de muestra: todavía no envía mensajes. Usa el teléfono o el email de contacto.'
+    }
+  </p>
+</form>
+<script is:inline>
+  document.querySelectorAll('form[data-email]').forEach(function (f) {
+    var sel = f.querySelector('#f-producto');
+    if (!sel) return;
+    sel.addEventListener('change', function () {
+      var asunto = f.getAttribute('data-asunto') + (sel.value ? ' · ' + sel.value : '');
+      f.action = 'mailto:' + f.getAttribute('data-email') + '?subject=' + encodeURIComponent(asunto);
+    });
+  });
+</script>

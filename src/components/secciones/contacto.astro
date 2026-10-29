@@ -1,0 +1,50 @@
+---
+// Contacto: ficha de datos en forma de tabla a la izquierda y formulario a la derecha, con el desplegable
+// «Producto de interés» relleno con los nombres de la sección `productos` (o la que use ese diseño).
+import { seccion, site, tel, mapa, whatsapp, buscarSeccion } from '../../data/site';
+import Seccion from '../ui/Seccion.astro';
+import Titular from '../ui/Titular.astro';
+import Icono from '../ui/Icono.astro';
+import FormularioContacto from '../ui/FormularioContacto.astro';
+interface Props { id: string }
+const s = seccion(Astro.props.id);
+const c = site.contacto;
+const productos = (buscarSeccion('productos')?.s.productos ?? []).map((p) => p.nombre).filter(Boolean);
+const datos = [
+  c.telefono && { icono: 'telefono', etiqueta: 'Teléfono', valor: c.telefono, url: tel(c.telefono) },
+  c.whatsapp && { icono: 'whatsapp', etiqueta: 'WhatsApp', valor: c.whatsapp, url: whatsapp(c.whatsapp) },
+  c.email && { icono: 'correo', etiqueta: 'Email', valor: c.email, url: `mailto:${c.email}` },
+  c.direccion && { icono: 'mapa', etiqueta: 'Almacén', valor: c.direccion, url: mapa(c.direccion) },
+  c.horario && { icono: 'reloj', etiqueta: 'Horario', valor: c.horario, url: '' },
+].filter(Boolean) as { icono: string; etiqueta: string; valor: string; url: string }[];
+---
+
+{
+  s && (
+    <Seccion id={Astro.props.id} class="border-t border-[var(--c-borde-fuerte)]">
+      <div class="grid gap-8 lg:grid-cols-12 lg:gap-10">
+        <div class="lg:col-span-5">
+          <Titular antetitulo={s.antetitulo} titulo={s.titulo} texto={s.texto} />
+          {datos.length > 0 && (
+            <dl class="panel divide-y divide-[var(--c-borde)]">
+              {datos.map((d) => (
+                <div class="grid grid-cols-[2.75rem_minmax(0,1fr)] items-start">
+                  <span class="grid h-full min-h-12 place-items-center border-r border-[var(--c-borde)] text-[var(--c-acento-texto)]">
+                    <Icono nombre={d.icono} tam={18} />
+                  </span>
+                  <div class="min-w-0 px-3 py-2.5">
+                    <dt class="mono text-[.7rem] uppercase tracking-wide opacity-70">{d.etiqueta}</dt>
+                    <dd class="break-words font-semibold">{d.url ? <a href={d.url} class="hover:text-[var(--c-acento-texto)]">{d.valor}</a> : d.valor}</dd>
+                  </div>
+                </div>
+              ))}
+            </dl>
+          )}
+        </div>
+        <div class="panel border-t-4 border-t-acento p-5 sm:p-8 lg:col-span-7">
+          <FormularioContacto boton={s.cta?.texto || 'Enviar consulta'} productos={productos} />
+        </div>
+      </div>
+    </Seccion>
+  )
+}

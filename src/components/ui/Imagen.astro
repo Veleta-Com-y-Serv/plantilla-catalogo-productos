@@ -1,0 +1,23 @@
+---
+// Imagen con carga diferida por defecto. `prioridad` para la del hero (se carga al momento).
+// `respaldo`: SVG de public/placeholders/ que se muestra si la foto todavía no existe o falla.
+interface Props { src?: string; alt?: string; ancho?: number; alto?: number; class?: string; prioridad?: boolean; respaldo?: string }
+const { src, alt = '', ancho = 800, alto = 600, class: clase = '', prioridad = false, respaldo = '' } = Astro.props;
+const alFallar = respaldo && respaldo !== src ? `this.onerror=null;this.src='${respaldo}'` : undefined;
+---
+
+{
+  src && (
+    <img
+      src={src}
+      alt={alt}
+      width={ancho}
+      height={alto}
+      class={clase}
+      loading={prioridad ? 'eager' : 'lazy'}
+      decoding="async"
+      fetchpriority={prioridad ? 'high' : undefined}
+      onerror={alFallar}
+    />
+  )
+}
