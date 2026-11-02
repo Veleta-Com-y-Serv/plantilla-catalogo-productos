@@ -67,13 +67,91 @@ secciones:
     texto: Precios sin IVA. Si no ves lo que buscas, lo conseguimos.
     cta: { texto: Pedir el catálogo completo, url: "/#contacto" }
     productos:
-      - { nombre: "Compresor de tornillo 7,5 kW", ref: CT-7510, categoria: Compresores, texto: Silencioso y con secador integrado. Para talleres con uso continuo., caracteristicas: "Potencia: 7,5 kW; Caudal: 1.050 l/min; Presión: 10 bar; Calderín: 500 l; Ruido: 66 dB", precio: "6.950 € + IVA", estado: Nuevo, imagen: /fotos/producto-1.jpg }
+      - nombre: "Compresor de tornillo 7,5 kW"
+        ref: CT-7510
+        categoria: Compresores
+        texto: "Silencioso y con secador integrado. Para talleres con uso continuo."
+        caracteristicas: "Potencia: 7,5 kW; Caudal: 1.050 l/min; Presión: 10 bar; Calderín: 500 l; Ruido: 66 dB"
+        precio: "6.950 € + IVA"
+        estado: Nuevo
+        imagen: /fotos/producto-1.jpg
+        detalle: |
+          Un compresor de tornillo está pensado para trabajar horas seguidas sin sobrecalentarse, y este modelo lo hace con un secador integrado que entrega el aire ya seco. Eso protege las herramientas neumáticas, las pistolas de pintura y las líneas de aire del taller, que sufren cuando llega humedad.
+
+          Se instala sobre su propio calderín, con una boca de salida y un cuadro eléctrico que arranca y para el motor según la demanda. Funciona de forma suave y sin vibraciones notables, así que puede quedarse dentro de la nave sin necesidad de una caseta aparte. Antes de entregarlo comprobamos presiones, fugas y el estado del secador.
+
+          Es una buena opción para talleres de mecánica, carpinterías o líneas de producción con varios puestos a la vez. Si dudas sobre el tamaño de la instalación, te ayudamos a calcular cuántas herramientas puedes conectar. Nuestro servicio técnico lo deja funcionando y se encarga de las revisiones periódicas y de los recambios originales.
       - { nombre: Compresor de pistón 100 l, ref: CP-3100, categoria: Compresores, texto: Ruedas y asa para moverlo por el taller., caracteristicas: "Potencia: 2,2 kW; Caudal: 360 l/min; Presión: 10 bar; Calderín: 100 l", precio: "689 € + IVA", estado: "", imagen: /fotos/producto-2.jpg }
-      - { nombre: Generador diésel insonorizado 10 kVA, ref: GD-1000, categoria: Generadores, texto: Arranque eléctrico y cuadro con protecciones., caracteristicas: "Potencia: 10 kVA; Motor: diésel 4 tiempos; Autonomía: 11 h al 75 %; Peso: 290 kg", precio: Consultar, estado: Nuevo, imagen: /fotos/producto-3.jpg }
-      - { nombre: "Generador gasolina 3,5 kW", ref: GG-0350, categoria: Generadores, texto: Ligero y con ruedas. Revisado en nuestro taller., caracteristicas: "Potencia: 3,5 kW; Depósito: 15 l; Salidas: 2 × 230 V; Garantía: 12 meses", precio: "420 € + IVA", estado: Ocasión, imagen: /fotos/producto-4.jpg }
-      - { nombre: Soldadora inverter MIG 250, ref: SM-0250, categoria: Soldadura, texto: Para acero e inoxidable. Con antorcha y pinza de masa., caracteristicas: "Intensidad: 30-250 A; Alimentación: 230 V; Hilo: 0,6-1,0 mm; Peso: 18 kg", precio: "1.190 € + IVA", estado: Nuevo, imagen: /fotos/producto-5.jpg }
-      - { nombre: Elevador de dos columnas 4 t, ref: EL-2040, categoria: Elevación, texto: Montaje e instalación incluidos en la provincia., caracteristicas: "Capacidad: 4.000 kg; Altura de elevación: 1.900 mm; Motor: 2,2 kW 400 V", precio: Consultar, estado: "", imagen: /fotos/producto-6.jpg }
-      - { nombre: Hidrolimpiadora de agua caliente 200 bar, ref: HL-2000, categoria: Hidrolimpiadoras, texto: Para naves, maquinaria agrícola y vehículos., caracteristicas: "Presión: 200 bar; Caudal: 900 l/h; Temperatura: hasta 140 °C; Motor: 400 V", precio: "2.480 € + IVA", estado: Nuevo, imagen: /fotos/producto-7.jpg }
+      - nombre: "Generador diésel insonorizado 10 kVA"
+        ref: GD-1000
+        categoria: Generadores
+        texto: "Arranque eléctrico y cuadro con protecciones."
+        caracteristicas: "Potencia: 10 kVA; Motor: diésel 4 tiempos; Autonomía: 11 h al 75 %; Peso: 290 kg"
+        precio: Consultar
+        estado: Nuevo
+        imagen: /fotos/producto-3.jpg
+        detalle: |
+          Este generador diésel está carrozado con material insonorizante, de modo que se puede usar en obras, eventos o como respaldo de una nave sin molestar a quien trabaja cerca. Su motor de cuatro tiempos está pensado para funcionar durante largos periodos y con un consumo contenido.
+
+          Lleva arranque eléctrico y un cuadro con las protecciones habituales, de modo que se conecta y se pone en marcha sin complicaciones. La estructura con patines facilita moverlo con una carretilla o una grúa, y el depósito permite una jornada completa de trabajo sin repostar.
+
+          Lo usan sobre todo constructoras, cooperativas agrícolas y empresas que no pueden quedarse sin corriente. Antes de la entrega lo revisamos en el taller, comprobamos niveles y arranque y te explicamos cómo conectarlo a tu instalación. El precio depende del plazo y de si necesitas transporte, así que pídenos presupuesto y te respondemos el mismo día laborable. Disponemos de recambios y de servicio técnico propio para cualquier incidencia.
+      - nombre: "Generador gasolina 3,5 kW"
+        ref: GG-0350
+        categoria: Generadores
+        texto: "Ligero y con ruedas. Revisado en nuestro taller."
+        caracteristicas: "Potencia: 3,5 kW; Depósito: 15 l; Salidas: 2 × 230 V; Garantía: 12 meses"
+        precio: "420 € + IVA"
+        estado: Ocasión
+        imagen: /fotos/producto-4.jpg
+        detalle: |
+          Un generador sencillo y manejable para quien necesita corriente de forma puntual: una reparación en el campo, una obra pequeña o un corte de luz en el taller. Esta unidad es de ocasión y pasa por nuestro taller antes de salir, donde cambiamos filtros y aceite y comprobamos que arranque a la primera.
+
+          Es un equipo ligero y con ruedas, por lo que una sola persona puede llevarlo de un sitio a otro. Dispone de dos salidas de 230 V para conectar herramientas, iluminación o un pequeño compresor, y su depósito da para varias horas de uso sin repostar.
+
+          Lo recomendamos a particulares con huerto o finca, pequeños instaladores y comunidades que quieren un equipo de apoyo sin gastar demasiado. Al ser de ocasión, la disponibilidad cambia: escríbenos o llámanos y te confirmamos si está en almacén y cuándo puedes recogerlo o recibirlo. Mantiene la garantía que figura en su ficha y puedes pasar por el taller para cualquier ajuste posterior.
+      - nombre: "Soldadora inverter MIG 250"
+        ref: SM-0250
+        categoria: Soldadura
+        texto: "Para acero e inoxidable. Con antorcha y pinza de masa."
+        caracteristicas: "Intensidad: 30-250 A; Alimentación: 230 V; Hilo: 0,6-1,0 mm; Peso: 18 kg"
+        precio: "1.190 € + IVA"
+        estado: Nuevo
+        imagen: /fotos/producto-5.jpg
+        detalle: |
+          La soldadora inverter MIG 250 es un equipo versátil para quien suelda acero e inoxidable con regularidad: cerrajería, estructuras ligeras, mantenimiento de maquinaria o trabajos en el campo. La tecnología inverter da un arco estable y un consumo eléctrico más ajustado que los equipos antiguos.
+
+          Se entrega con antorcha y pinza de masa, de modo que solo hace falta conectarla a la red, colocar la bobina de hilo y el gas adecuado y empezar a trabajar. El ajuste de intensidad permite pasar de chapas finas a piezas más gruesas sin cambiar de máquina, y su peso contenido facilita llevarla de un puesto a otro.
+
+          Antes de la venta la probamos en el taller, y si lo necesitas te enseñamos los ajustes básicos según el material. También podemos suministrarte hilo, boquillas y recambios de antorcha para que no se interrumpa el trabajo. Pide presupuesto con los consumibles que uses y te preparamos una oferta conjunta, con entrega rápida si está en almacén.
+      - nombre: "Elevador de dos columnas 4 t"
+        ref: EL-2040
+        categoria: Elevación
+        texto: "Montaje e instalación incluidos en la provincia."
+        caracteristicas: "Capacidad: 4.000 kg; Altura de elevación: 1.900 mm; Motor: 2,2 kW 400 V"
+        precio: Consultar
+        estado: ""
+        imagen: /fotos/producto-6.jpg
+        detalle: |
+          El elevador de dos columnas es la herramienta central de cualquier taller de mecánica: permite acceder cómodamente a los bajos del vehículo y trabajar de pie con seguridad. Este modelo está dimensionado para turismos y furgonetas, con una capacidad holgada para el uso diario.
+
+          Lo vendemos con montaje e instalación incluidos en la provincia. Nuestros técnicos comprueban el suelo, anclan las columnas, ajustan los brazos y los sincronizan, y dejan el equipo probado con carga antes de entregarlo. También te explicamos las revisiones periódicas que conviene hacer y los puntos de engrase.
+
+          Es una inversión pensada para durar, por lo que el precio se ajusta a cada caso según la alimentación eléctrica, el tipo de pavimento y los accesorios que necesites. Cuéntanos cómo es tu local y te preparamos un presupuesto cerrado. Contamos con servicio técnico propio y recambios en almacén para que el equipo no pare, y podemos revisarlo periódicamente si lo prefieres.
+      - nombre: "Hidrolimpiadora de agua caliente 200 bar"
+        ref: HL-2000
+        categoria: Hidrolimpiadoras
+        texto: "Para naves, maquinaria agrícola y vehículos."
+        caracteristicas: "Presión: 200 bar; Caudal: 900 l/h; Temperatura: hasta 140 °C; Motor: 400 V"
+        precio: "2.480 € + IVA"
+        estado: Nuevo
+        imagen: /fotos/producto-7.jpg
+        detalle: |
+          Esta hidrolimpiadora de agua caliente está pensada para quitar grasa, barro y restos secos que el agua fría no arranca: naves, maquinaria agrícola, camiones y vehículos de obra. El calentador integrado permite limpiar con más rapidez y con menos detergente.
+
+          Es un equipo de alimentación trifásica, con carro, enrollador de manguera y lanza con pistola, y se pone en marcha desde un panel claro con regulación de presión y de temperatura. Su construcción robusta aguanta el uso diario en explotaciones y talleres sin demasiados cuidados.
+
+          Antes de entregarla la revisamos, comprobamos la bomba, el quemador y el termostato, y te enseñamos a usarla con seguridad. Si limpias a menudo, te recomendamos acompañarla de los detergentes adecuados, que también podemos suministrarte. Estamos cerca para cualquier avería y mantenemos recambios de las piezas que más se desgastan. Pide tu presupuesto y te informamos de plazos de entrega.
       - { nombre: Taladro percutor 1.100 W, ref: TP-1100, categoria: Herramienta eléctrica, texto: Con maletín y juego de brocas., caracteristicas: "Potencia: 1.100 W; Portabrocas: 13 mm; Percusión: 48.000 gpm", precio: "139 € + IVA", estado: "", imagen: /fotos/producto-8.jpg }
 
   ventajas:
