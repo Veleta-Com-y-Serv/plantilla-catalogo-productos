@@ -1,6 +1,7 @@
 ---
 import Base from '../layouts/Base.astro';
 import { buscarSeccion } from '../data/site';
+import { rutaDeSeccion } from '../lib/multipagina';
 const productos = buscarSeccion('productos');
 ---
 
@@ -13,7 +14,7 @@ const productos = buscarSeccion('productos');
         <p class="mt-4 opacity-85">Puede que el enlace esté mal o que el producto ya no esté en el catálogo.</p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a class="btn" href="/">Volver al inicio</a>
-          {productos && <a class="btn-sec text-primario" href={`/#${productos.id}`}>{productos.s.antetitulo || productos.s.titulo}</a>}
+          {productos && <a class="btn-sec text-primario" href={rutaDeSeccion(productos.id)}>{productos.s.antetitulo || productos.s.titulo}</a>}
         </div>
       </div>
     </div>

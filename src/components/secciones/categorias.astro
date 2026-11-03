@@ -7,11 +7,12 @@ import Seccion from '../ui/Seccion.astro';
 import Titular from '../ui/Titular.astro';
 import Imagen from '../ui/Imagen.astro';
 import Icono from '../ui/Icono.astro';
+import { rutaDeSeccion } from '../../lib/multipagina';
 interface Props { id: string }
 const s = seccion(Astro.props.id);
 const items = s ? s.items.filter((i) => i.titulo) : [];
 const productos = buscarSeccion('productos');
-const destino = productos ? `/#${productos.id}` : '';
+const destino = productos ? rutaDeSeccion(productos.id) : '';
 ---
 
 {

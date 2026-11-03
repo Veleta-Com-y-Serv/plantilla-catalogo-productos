@@ -3,6 +3,7 @@
 // «Web creada con NoExpertise» se muestra si site.yaml → marca_pie no es false.
 import { site, tel, mapa, buscarSeccion, clave } from '../data/site';
 import Icono from './ui/Icono.astro';
+import { rutaDeSeccion } from '../lib/multipagina';
 interface Props { variante?: string }
 const { variante = 'tecnico' } = Astro.props;
 const c = site.contacto;
@@ -10,7 +11,7 @@ const redes = Object.entries(site.redes).filter(([, url]) => url);
 const anio = new Date().getFullYear();
 const cats = buscarSeccion('categorias');
 const productos = buscarSeccion('productos');
-const destino = productos ? `/#${productos.id}` : cats ? `/#${cats.id}` : '/';
+const destino = productos ? rutaDeSeccion(productos.id) : cats ? rutaDeSeccion(cats.id) : '/';
 const categorias = cats ? cats.s.items.filter((i) => i.titulo).slice(0, 10) : [];
 ---
 

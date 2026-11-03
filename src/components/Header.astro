@@ -7,12 +7,13 @@
 import { site, tel, buscarSeccion, clave } from '../data/site';
 import type { Enlace } from '../data/site';
 import Icono from './ui/Icono.astro';
+import { rutaDeSeccion } from '../lib/multipagina';
 interface Props { variante?: string; cta?: Enlace | null }
 const { variante = 'tecnica', cta = null } = Astro.props;
 const c = site.contacto;
 const cats = buscarSeccion('categorias');
 const productos = buscarSeccion('productos');
-const destino = productos ? `/#${productos.id}` : cats ? `/#${cats.id}` : '/';
+const destino = productos ? rutaDeSeccion(productos.id) : cats ? rutaDeSeccion(cats.id) : '/';
 const categorias = cats ? cats.s.items.filter((i) => i.titulo) : [];
 ---
 
